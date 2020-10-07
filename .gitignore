@@ -1,5 +1,18 @@
-# Object file
-*.o
+# Compiled class file
+*.class
 
-# Ada Library Information
-*.ali
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+.settings/
+.classpath
+.project
+.gitattributes
+.gitignore
+/bin/

@@ -1,0 +1,8 @@
+name: Dungeon
+version: 1.0
+api-version: 1.15
+author: Vilevar
+main: be.vilevar.dungeon.DungeonPlugin
+commands:
+ dungeon:
+  description: Command to start or stop a dungeon
