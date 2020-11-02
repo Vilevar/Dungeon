@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPigZombie;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonZombifiedPiglin extends EntityPigZombie implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonZombifiedPiglin extends EntityPigZombie implements IDungeonE
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonZombifiedPiglin(EntityTypes<? extends DungeonZombifiedPiglin> entitytypes, World world) {
-		super(entitytypes, world);
+	public DungeonZombifiedPiglin(DungeonEntityTypes<EntityPigZombie, ? extends DungeonZombifiedPiglin> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 	
 	@Override
@@ -30,11 +29,6 @@ public class DungeonZombifiedPiglin extends EntityPigZombie implements IDungeonE
 			this.setBukkitEntity(new CraftPigZombie(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

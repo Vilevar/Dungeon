@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityEndermite;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonEndermite extends EntityEndermite implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonEndermite extends EntityEndermite implements IDungeonEntity 
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonEndermite(EntityTypes<? extends DungeonEndermite> var0, World var1) {
-		super(var0, var1);
+	public DungeonEndermite(DungeonEntityTypes<EntityEndermite, ? extends DungeonEndermite> var0, World var1) {
+		super(var0.model, var1);
 	}
 	
 	@Override
@@ -30,11 +29,6 @@ public class DungeonEndermite extends EntityEndermite implements IDungeonEntity 
 			this.setBukkitEntity(new CraftEndermite(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

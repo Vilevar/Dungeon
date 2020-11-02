@@ -60,7 +60,7 @@ public class EntityFileManager {
 	public Entity spawn(Hall hall, Location loc) {
 		Entity ent;
 		if(this.type instanceof DungeonEntityTypes) {
-			ent = ((DungeonEntityTypes<?>) type).spawn(hall, loc);
+			ent = ((DungeonEntityTypes<?, ?>) type).spawn(hall, loc);
 		} else {
 			CraftWorld w = (CraftWorld) loc.getWorld();
 			net.minecraft.server.v1_16_R1.Entity e = this.type.a(w.getHandle());

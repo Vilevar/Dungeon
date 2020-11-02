@@ -11,7 +11,6 @@ import net.minecraft.server.v1_16_R1.DamageSource;
 import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.EntityVindicator;
 import net.minecraft.server.v1_16_R1.World;
 
@@ -20,8 +19,8 @@ public class DungeonVindicator extends EntityVindicator implements IDungeonEntit
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonVindicator(EntityTypes<? extends DungeonVindicator> var0, World var1) {
-		super(var0, var1);
+	public DungeonVindicator(DungeonEntityTypes<EntityVindicator, ? extends DungeonVindicator> var0, World var1) {
+		super(var0.model, var1);
 	}
 
 	@Override
@@ -30,11 +29,6 @@ public class DungeonVindicator extends EntityVindicator implements IDungeonEntit
 			this.setBukkitEntity(new CraftVindicator(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

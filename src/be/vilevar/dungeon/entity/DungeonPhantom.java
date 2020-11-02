@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPhantom;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonPhantom extends EntityPhantom implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonPhantom extends EntityPhantom implements IDungeonEntity {
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonPhantom(EntityTypes<? extends DungeonPhantom> entitytypes, World world) {
-		super(entitytypes, world);
+	public DungeonPhantom(DungeonEntityTypes<EntityPhantom, ? extends DungeonPhantom> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override
@@ -30,11 +29,6 @@ public class DungeonPhantom extends EntityPhantom implements IDungeonEntity {
 			this.setBukkitEntity(new CraftPhantom(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

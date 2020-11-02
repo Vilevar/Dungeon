@@ -1,9 +1,5 @@
 package be.vilevar.dungeon.entity;
 
-import java.lang.reflect.Field;
-
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftDrowned;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 import be.vilevar.dungeon.Hall;
@@ -12,31 +8,16 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityDrowned;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonDrowned extends EntityDrowned implements IDungeonEntity {
 
-	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonDrowned(EntityTypes<? extends DungeonDrowned> var0, World var1) {
-		super(var0, var1);
+	public DungeonDrowned(DungeonEntityTypes<EntityDrowned, ? extends DungeonDrowned> var0, World var1) {
+		super(var0.model, var1);
 	}
 	
-	@Override
-	public CraftEntity getBukkitEntity() {
-		if (this.bukkitEntity == null) {
-			this.setBukkitEntity(new CraftDrowned(this.world.getServer(), this));
-		}
-		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
-	}
-
 	@Override
 	public boolean setGoalTarget(EntityLiving entityliving, TargetReason reason, boolean fireEvent) {
 		return this.canTarget(entityliving) && super.setGoalTarget(entityliving, reason, fireEvent);
@@ -60,8 +41,8 @@ public class DungeonDrowned extends EntityDrowned implements IDungeonEntity {
 	}
 	
 	private void removeFromHall() {
-		if(this.hall.hasBegon() && this.hall.getEntities().contains(this.bukkitEntity))
-			if(this.hall.removeEntity(this.bukkitEntity) && this.hall.getDungeon().hasBegon())
+		if(this.hall.hasBegon() && this.hall.getEntities().contains(this.getBukkitEntity()))
+			if(this.hall.removeEntity(this.getBukkitEntity()) && this.hall.getDungeon().hasBegon())
 				this.hall.getDungeon().toNextState();
 	}
 	
@@ -91,16 +72,4 @@ public class DungeonDrowned extends EntityDrowned implements IDungeonEntity {
 		return false;
 	}
 	
-	private void setBukkitEntity(CraftEntity e) {
-		this.bukkitEntity = e;
-		try {
-			Field field = Entity.class.getDeclaredField("bukkitEntity");
-			field.setAccessible(true);
-			field.set(this, e);
-			field.setAccessible(false);
-		} catch (Exception ex) {
-			System.out.println("Couldn't modify the super bukkitEntity.");
-		}
-	}
-
 }

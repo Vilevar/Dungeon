@@ -12,8 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityMagmaCube;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntitySlime;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonMagmaCube extends EntityMagmaCube implements IDungeonEntity {
@@ -21,8 +19,8 @@ public class DungeonMagmaCube extends EntityMagmaCube implements IDungeonEntity 
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonMagmaCube(EntityTypes<? extends DungeonMagmaCube> var0, World var1) {
-		super(var0, var1);
+	public DungeonMagmaCube(DungeonEntityTypes<EntityMagmaCube, ? extends DungeonMagmaCube> var0, World var1) {
+		super(var0.model, var1);
 	}
 	
 	@Override
@@ -31,13 +29,6 @@ public class DungeonMagmaCube extends EntityMagmaCube implements IDungeonEntity 
 			this.setBukkitEntity(new CraftMagmaCube(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public EntityTypes<? extends EntitySlime> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ?
-				(EntityTypes<? extends EntitySlime>) ((DungeonEntityTypes<? extends EntitySlime>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

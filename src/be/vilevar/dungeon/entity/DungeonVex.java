@@ -11,7 +11,6 @@ import net.minecraft.server.v1_16_R1.DamageSource;
 import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.EntityVex;
 import net.minecraft.server.v1_16_R1.World;
 
@@ -20,7 +19,7 @@ public class DungeonVex extends EntityVex implements IDungeonEntity {
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonVex(EntityTypes<? extends DungeonVex> entitytypes, World world) {
+	public DungeonVex(DungeonEntityTypes<EntityVex, ? extends DungeonVex> entitytypes, World world) {
 		super(entitytypes, world);
 	}
 
@@ -30,11 +29,6 @@ public class DungeonVex extends EntityVex implements IDungeonEntity {
 			this.setBukkitEntity(new CraftVex(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

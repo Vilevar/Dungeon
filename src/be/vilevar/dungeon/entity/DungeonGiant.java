@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityGiantZombie;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonGiant extends EntityGiantZombie implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonGiant extends EntityGiantZombie implements IDungeonEntity {
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonGiant(EntityTypes<? extends DungeonGiant> var0, World var1) {
-		super(var0, var1);
+	public DungeonGiant(DungeonEntityTypes<EntityGiantZombie, ? extends DungeonGiant> var0, World var1) {
+		super(var0.model, var1);
 	}
 	
 	@Override
@@ -30,11 +29,6 @@ public class DungeonGiant extends EntityGiantZombie implements IDungeonEntity {
 			this.setBukkitEntity(new CraftGiant(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

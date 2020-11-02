@@ -3,7 +3,6 @@ package be.vilevar.dungeon.entity;
 import java.lang.reflect.Field;
 
 import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftZombie;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 import be.vilevar.dungeon.Hall;
@@ -11,7 +10,6 @@ import net.minecraft.server.v1_16_R1.DamageSource;
 import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.EntityZombie;
 import net.minecraft.server.v1_16_R1.World;
 
@@ -20,21 +18,8 @@ public class DungeonZombie extends EntityZombie implements IDungeonEntity {
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonZombie(EntityTypes<? extends DungeonZombie> entitytypes, World world) {
-		super(entitytypes, world);
-	}
-
-	@Override
-	public CraftEntity getBukkitEntity() {
-		if (this.bukkitEntity == null) {
-			this.setBukkitEntity(new CraftZombie(this.world.getServer(), this));
-		}
-		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
+	public DungeonZombie(DungeonEntityTypes<EntityZombie, ? extends DungeonZombie> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override

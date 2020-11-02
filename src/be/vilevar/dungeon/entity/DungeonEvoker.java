@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityEvoker;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonEvoker extends EntityEvoker implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonEvoker extends EntityEvoker implements IDungeonEntity {
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonEvoker(EntityTypes<? extends DungeonEvoker> var0, World var1) {
-		super(var0, var1);
+	public DungeonEvoker(DungeonEntityTypes<EntityEvoker, ? extends DungeonEvoker> var0, World var1) {
+		super(var0.model, var1);
 	}
 	
 	@Override
@@ -30,11 +29,6 @@ public class DungeonEvoker extends EntityEvoker implements IDungeonEntity {
 			this.setBukkitEntity(new CraftEvoker(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

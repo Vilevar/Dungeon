@@ -1,9 +1,5 @@
 package be.vilevar.dungeon.entity;
 
-import java.lang.reflect.Field;
-
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftCaveSpider;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 import be.vilevar.dungeon.Hall;
@@ -12,29 +8,14 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityCaveSpider;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonCaveSpider extends EntityCaveSpider implements IDungeonEntity {
 
-	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonCaveSpider(EntityTypes<? extends DungeonCaveSpider> entitytypes, World world) {
-		super(entitytypes, world);
-	}
-	
-	@Override
-	public CraftEntity getBukkitEntity() {
-		if (this.bukkitEntity == null) {
-			this.setBukkitEntity(new CraftCaveSpider(this.world.getServer(), this));
-		}
-		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
+	public DungeonCaveSpider(DungeonEntityTypes<EntityCaveSpider, ? extends DungeonCaveSpider> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override
@@ -60,8 +41,8 @@ public class DungeonCaveSpider extends EntityCaveSpider implements IDungeonEntit
 	}
 	
 	private void removeFromHall() {
-		if(this.hall.hasBegon() && this.hall.getEntities().contains(this.bukkitEntity))
-			if(this.hall.removeEntity(this.bukkitEntity) && this.hall.getDungeon().hasBegon())
+		if(this.hall.hasBegon() && this.hall.getEntities().contains(this.getBukkitEntity()))
+			if(this.hall.removeEntity(this.getBukkitEntity()) && this.hall.getDungeon().hasBegon())
 				this.hall.getDungeon().toNextState();
 	}
 	
@@ -89,18 +70,6 @@ public class DungeonCaveSpider extends EntityCaveSpider implements IDungeonEntit
 			return this.hall.getDungeon().getAlivePlayers().contains(((EntityPlayer) ent).getBukkitEntity());
 		}
 		return false;
-	}
-	
-	private void setBukkitEntity(CraftEntity e) {
-		this.bukkitEntity = e;
-		try {
-			Field field = Entity.class.getDeclaredField("bukkitEntity");
-			field.setAccessible(true);
-			field.set(this, e);
-			field.setAccessible(false);
-		} catch (Exception ex) {
-			System.out.println("Couldn't modify the super bukkitEntity.");
-		}
 	}
 
 }

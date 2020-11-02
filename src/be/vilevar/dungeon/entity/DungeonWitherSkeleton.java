@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
 import net.minecraft.server.v1_16_R1.EntitySkeletonWither;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonWitherSkeleton extends EntitySkeletonWither implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonWitherSkeleton extends EntitySkeletonWither implements IDung
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonWitherSkeleton(EntityTypes<? extends DungeonWitherSkeleton> entitytypes, World world) {
-		super(entitytypes, world);
+	public DungeonWitherSkeleton(DungeonEntityTypes<EntitySkeletonWither, ? extends DungeonWitherSkeleton> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override
@@ -30,11 +29,6 @@ public class DungeonWitherSkeleton extends EntitySkeletonWither implements IDung
 			this.setBukkitEntity(new CraftWitherSkeleton(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

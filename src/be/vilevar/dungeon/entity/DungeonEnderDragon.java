@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityEnderDragon;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonEnderDragon extends EntityEnderDragon implements IDungeonEntity {
@@ -20,7 +19,7 @@ public class DungeonEnderDragon extends EntityEnderDragon implements IDungeonEnt
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonEnderDragon(EntityTypes<? extends DungeonEnderDragon> entitytypes, World world) {
+	public DungeonEnderDragon(DungeonEntityTypes<EntityEnderDragon, ? extends DungeonEnderDragon> entitytypes, World world) {
 		super(entitytypes, world);
 	}
 	
@@ -30,11 +29,6 @@ public class DungeonEnderDragon extends EntityEnderDragon implements IDungeonEnt
 			this.setBukkitEntity(new CraftEnderDragon(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

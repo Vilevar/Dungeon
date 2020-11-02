@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
 import net.minecraft.server.v1_16_R1.EntitySlime;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonSlime extends EntitySlime implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonSlime extends EntitySlime implements IDungeonEntity {
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonSlime(EntityTypes<? extends DungeonSlime> entitytypes, World world) {
-		super(entitytypes, world);
+	public DungeonSlime(DungeonEntityTypes<EntitySlime, ? extends DungeonSlime> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override
@@ -30,13 +29,6 @@ public class DungeonSlime extends EntitySlime implements IDungeonEntity {
 			this.setBukkitEntity(new CraftSlime(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public EntityTypes<? extends EntitySlime> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ?
-				(EntityTypes<? extends EntitySlime>) ((DungeonEntityTypes<? extends EntitySlime>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

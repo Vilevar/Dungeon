@@ -12,7 +12,6 @@ import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityIllagerIllusioner;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.World;
 
 public class DungeonIllusioner extends EntityIllagerIllusioner implements IDungeonEntity {
@@ -20,8 +19,8 @@ public class DungeonIllusioner extends EntityIllagerIllusioner implements IDunge
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonIllusioner(EntityTypes<? extends DungeonIllusioner> entitytypes, World world) {
-		super(entitytypes, world);
+	public DungeonIllusioner(DungeonEntityTypes<EntityIllagerIllusioner, ? extends DungeonIllusioner> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override
@@ -30,11 +29,6 @@ public class DungeonIllusioner extends EntityIllagerIllusioner implements IDunge
 			this.setBukkitEntity(new CraftIllusioner(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override

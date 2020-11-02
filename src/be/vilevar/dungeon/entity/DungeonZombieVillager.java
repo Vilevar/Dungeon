@@ -11,7 +11,6 @@ import net.minecraft.server.v1_16_R1.DamageSource;
 import net.minecraft.server.v1_16_R1.Entity;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityTypes;
 import net.minecraft.server.v1_16_R1.EntityZombieVillager;
 import net.minecraft.server.v1_16_R1.World;
 
@@ -20,8 +19,8 @@ public class DungeonZombieVillager extends EntityZombieVillager implements IDung
 	protected CraftEntity bukkitEntity;
 	protected Hall hall;
 	
-	public DungeonZombieVillager(EntityTypes<? extends DungeonZombieVillager> entitytypes, World world) {
-		super(entitytypes, world);
+	public DungeonZombieVillager(DungeonEntityTypes<EntityZombieVillager, ? extends DungeonZombieVillager> entitytypes, World world) {
+		super(entitytypes.model, world);
 	}
 
 	@Override
@@ -30,11 +29,6 @@ public class DungeonZombieVillager extends EntityZombieVillager implements IDung
 			this.setBukkitEntity(new CraftVillagerZombie(this.world.getServer(), this));
 		}
 		return this.bukkitEntity;
-	}
-
-	@Override
-	public EntityTypes<?> getEntityType() {
-		return super.getEntityType() instanceof DungeonEntityTypes ? ((DungeonEntityTypes<?>) super.getEntityType()).model : super.getEntityType();
 	}
 
 	@Override
