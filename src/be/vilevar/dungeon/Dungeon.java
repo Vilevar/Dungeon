@@ -20,6 +20,7 @@ public class Dungeon {
 
 	private final String name;
 	private final int minX, maxX, minZ, maxZ;
+	private final boolean keepInventory;
 	private final List<Hall> halls;
 	private final List<Reward> rewards;
 	private final Location rewardLocation;
@@ -30,12 +31,14 @@ public class Dungeon {
 	private List<Player> alivePlayers;
 	private int state;
 	
-	public Dungeon(String name, int minX, int maxX, int minZ, int maxZ, @Nonnull List<Reward> rewards, Location rewardLocation) {
+	public Dungeon(String name, int minX, int maxX, int minZ, int maxZ, boolean keepInventory, @Nonnull List<Reward> rewards,
+			Location rewardLocation) {
 		this.name = name;
 		this.minX = Math.min(minX, maxX);
 		this.maxX = Math.max(minX, maxX);
 		this.minZ = Math.min(minZ, maxZ);
 		this.maxZ = Math.max(minZ, maxZ);
+		this.keepInventory = keepInventory;
 		this.halls = new ArrayList<>();
 		this.rewards = rewards;
 		this.rewardLocation = rewardLocation;
@@ -65,6 +68,10 @@ public class Dungeon {
 
 	public int getMaxZ() {
 		return this.maxZ;
+	}
+	
+	public boolean keepInventory() {
+		return this.keepInventory;
 	}
 	
 	public boolean isInDungeon(Location loc) {

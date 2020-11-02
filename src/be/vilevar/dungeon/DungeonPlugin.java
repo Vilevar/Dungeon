@@ -20,7 +20,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -136,18 +136,24 @@ public class DungeonPlugin extends JavaPlugin implements Listener, IDungeonPlugi
 	}*/
 	
 	@EventHandler
-	public void onEntityDeath(EntityDeathEvent e) {
-		Entity ent = e.getEntity();
-		Dungeon d = this.getDungeonAt(ent.getLocation());
+	public void onEntityDeath(PlayerDeathEvent e) {
+		Player p = e.getEntity();
+		Dungeon d = this.getDungeonAt(p.getLocation());
 		if(d != null && d.hasBegon() && !d.isGameFinished()) {
-			if(ent instanceof Player) {
-				d.playerKilled((Player) ent);
+			try {
+				d.playerKilled(p);
+				if(d.keepInventory()) {
+					e.setDroppedExp(0);
+					e.setKeepInventory(true);
+				}
+			} catch (Exception exception) {
+			}
+				
 	//		} else {
 	//			Hall hall = d.getHall(d.getState());
 	//			if(hall.getEntities().contains(ent) && hall.removeEntity(ent)) {
 	//				d.toNextState();
 	//			}
-			}
 		}
 	}
 	

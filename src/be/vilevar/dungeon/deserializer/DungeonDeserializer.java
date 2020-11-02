@@ -37,6 +37,7 @@ public class DungeonDeserializer implements DungeonJsonDeserializer<Dungeon> {
 		int maxX = obj.get("max-x").getAsInt();
 		int minZ = obj.get("min-z").getAsInt();
 		int maxZ = obj.get("max-z").getAsInt();
+		boolean keepInventory = obj.get("keep-inventory").getAsBoolean();
 		List<Reward> rewards = new ArrayList<>();
 		Location rewardLocation = ctx.deserialize(obj.get("reward-location"), Location.class);
 		
@@ -46,7 +47,7 @@ public class DungeonDeserializer implements DungeonJsonDeserializer<Dungeon> {
 			rewards.add(new Reward(ctx.deserialize(rewardObj.get("item"), ItemStack.class), rewardObj.get("probability").getAsDouble()));
 		}
 		
-		Dungeon dungeon = new Dungeon(name, minX, maxX, minZ, maxZ, rewards, rewardLocation);
+		Dungeon dungeon = new Dungeon(name, minX, maxX, minZ, maxZ, keepInventory, rewards, rewardLocation);
 		
 		// Getting halls
 		JsonArray hallArray = obj.getAsJsonArray("halls");
