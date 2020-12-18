@@ -3,17 +3,17 @@ package be.vilevar.dungeon.entity;
 
 import java.lang.reflect.Field;
 
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftWither;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftWither;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 import be.vilevar.dungeon.Hall;
-import net.minecraft.server.v1_16_R1.DamageSource;
-import net.minecraft.server.v1_16_R1.Entity;
-import net.minecraft.server.v1_16_R1.EntityLiving;
-import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.EntityWither;
-import net.minecraft.server.v1_16_R1.World;
+import net.minecraft.server.v1_16_R3.DamageSource;
+import net.minecraft.server.v1_16_R3.Entity;
+import net.minecraft.server.v1_16_R3.EntityLiving;
+import net.minecraft.server.v1_16_R3.EntityPlayer;
+import net.minecraft.server.v1_16_R3.EntityWither;
+import net.minecraft.server.v1_16_R3.World;
 
 public class DungeonWither extends EntityWither implements IDungeonEntity {
 

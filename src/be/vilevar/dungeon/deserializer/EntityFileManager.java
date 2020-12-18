@@ -3,7 +3,7 @@ package be.vilevar.dungeon.deserializer;
 import java.util.Arrays;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_16_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffect;
 
 import be.vilevar.dungeon.Hall;
 import be.vilevar.dungeon.entity.DungeonEntityTypes;
-import net.minecraft.server.v1_16_R1.EntityTypes;
+import net.minecraft.server.v1_16_R3.EntityTypes;
 
 public class EntityFileManager {
 
@@ -63,7 +63,7 @@ public class EntityFileManager {
 			ent = ((DungeonEntityTypes<?, ?>) type).spawn(hall, loc);
 		} else {
 			CraftWorld w = (CraftWorld) loc.getWorld();
-			net.minecraft.server.v1_16_R1.Entity e = this.type.a(w.getHandle());
+			net.minecraft.server.v1_16_R3.Entity e = this.type.a(w.getHandle());
 			e.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
 			e.setHeadRotation(loc.getYaw());
 			ent = w.addEntity(e, SpawnReason.CUSTOM, null);

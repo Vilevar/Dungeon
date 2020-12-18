@@ -3,12 +3,12 @@ package be.vilevar.dungeon.entity;
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 import be.vilevar.dungeon.Hall;
-import net.minecraft.server.v1_16_R1.DamageSource;
-import net.minecraft.server.v1_16_R1.Entity;
-import net.minecraft.server.v1_16_R1.EntityIllagerIllusioner;
-import net.minecraft.server.v1_16_R1.EntityLiving;
-import net.minecraft.server.v1_16_R1.EntityPlayer;
-import net.minecraft.server.v1_16_R1.World;
+import net.minecraft.server.v1_16_R3.DamageSource;
+import net.minecraft.server.v1_16_R3.Entity;
+import net.minecraft.server.v1_16_R3.EntityIllagerIllusioner;
+import net.minecraft.server.v1_16_R3.EntityLiving;
+import net.minecraft.server.v1_16_R3.EntityPlayer;
+import net.minecraft.server.v1_16_R3.World;
 
 public class DungeonIllusioner extends EntityIllagerIllusioner implements IDungeonEntity {
 

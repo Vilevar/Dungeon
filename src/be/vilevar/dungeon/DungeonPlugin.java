@@ -145,6 +145,8 @@ public class DungeonPlugin extends JavaPlugin implements Listener, IDungeonPlugi
 				if(d.keepInventory()) {
 					e.setDroppedExp(0);
 					e.setKeepInventory(true);
+					e.setNewTotalExp(p.getTotalExperience());
+					e.getDrops().clear();
 				}
 			} catch (Exception exception) {
 			}

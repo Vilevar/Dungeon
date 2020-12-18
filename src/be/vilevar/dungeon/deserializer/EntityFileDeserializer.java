@@ -10,9 +10,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import net.minecraft.server.v1_16_R1.EntityTypes;
-import net.minecraft.server.v1_16_R1.IRegistry;
-import net.minecraft.server.v1_16_R1.MinecraftKey;
+import net.minecraft.server.v1_16_R3.EntityTypes;
+import net.minecraft.server.v1_16_R3.IRegistry;
+import net.minecraft.server.v1_16_R3.MinecraftKey;
 
 public class EntityFileDeserializer implements DungeonJsonDeserializer<EntityFileManager> {
 

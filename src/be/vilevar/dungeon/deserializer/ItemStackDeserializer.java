@@ -2,7 +2,7 @@ package be.vilevar.dungeon.deserializer;
 
 import java.lang.reflect.Type;
 
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.JsonDeserializationContext;
@@ -11,10 +11,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.minecraft.server.v1_16_R1.IMaterial;
-import net.minecraft.server.v1_16_R1.IRegistry;
-import net.minecraft.server.v1_16_R1.MinecraftKey;
-import net.minecraft.server.v1_16_R1.MojangsonParser;
+import net.minecraft.server.v1_16_R3.IMaterial;
+import net.minecraft.server.v1_16_R3.IRegistry;
+import net.minecraft.server.v1_16_R3.MinecraftKey;
+import net.minecraft.server.v1_16_R3.MojangsonParser;
 
 public class ItemStackDeserializer implements DungeonJsonDeserializer<ItemStack> {
 
@@ -25,7 +25,7 @@ public class ItemStackDeserializer implements DungeonJsonDeserializer<ItemStack>
 		IMaterial item = IRegistry.ITEM.get(new MinecraftKey(obj.get("type").getAsString()));
 		int count = obj.has("count") ? obj.get("count").getAsInt() : 1;
 		
-		net.minecraft.server.v1_16_R1.ItemStack is = new net.minecraft.server.v1_16_R1.ItemStack(item, count);
+		net.minecraft.server.v1_16_R3.ItemStack is = new net.minecraft.server.v1_16_R3.ItemStack(item, count);
 		
 		if(obj.has("tag")) {
 			try {
